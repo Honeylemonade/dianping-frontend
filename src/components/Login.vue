@@ -9,7 +9,7 @@
               <el-input v-model="userForm.telephone"/>
             </el-form-item>
             <el-form-item label="密码">
-              <el-input v-model="userForm.password"/>
+              <el-input type="password" show-password v-model="userForm.password"/>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="userLogin()">登陆</el-button>
@@ -28,7 +28,7 @@
               <el-input v-model="adminForm.userName"/>
             </el-form-item>
             <el-form-item label="密码">
-              <el-input v-model="adminForm.password"/>
+              <el-input type="password" show-password v-model="adminForm.password"/>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="adminLogin()">登陆</el-button>
@@ -55,8 +55,8 @@ export default {
     return {
       activeName: 'user',
       userForm: {
-        telephone: "123",
-        password: "123"
+        telephone: "15845805261",
+        password: "123456"
       },
       adminForm: {
         userName: "root",
@@ -71,6 +71,7 @@ export default {
       if (resp.status === "SUCCESS") {
         ElMessage({message: '登录成功.', type: 'success'})
         store.setUserRole()
+        store.setUserId(resp.data.id)
         await this.$router.push('/HomePage')
       } else {
         ElMessage({message: '登录失败.', type: 'error'})

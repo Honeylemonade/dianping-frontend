@@ -104,10 +104,12 @@ export function addCategory(name, iconUrl, sort) {
     })
 }
 
-export function getShopList(categoryId) {
+export function getShopList(categoryId, pageNum, pageSize) {
     const config = {
         params: {
-            categoryId: categoryId
+            categoryId: categoryId,
+            pageNum: pageNum,
+            pageSize: pageSize
         }
     }
     return request.get("/shops", config).then(response => {
@@ -115,13 +117,26 @@ export function getShopList(categoryId) {
     })
 }
 
-export function searchShop(latitude, longitude, keyword, categoryId) {
+export function recommendShop(userId) {
+    const config = {
+        params: {
+            userId: userId
+        }
+    }
+    return request.get("/shops/recommend", config).then(response => {
+        return response.data
+    })
+}
+
+export function searchShop(latitude, longitude, keyword, categoryId, pageNum, pageSize) {
     const config = {
         params: {
             latitude: latitude,
             longitude: longitude,
             keyword: keyword,
-            categoryId: categoryId
+            categoryId: categoryId,
+            pageNum: pageNum,
+            pageSize: pageSize
         }
     }
     return request.get("/shops/search", config).then(response => {

@@ -4,7 +4,7 @@
       <Home></Home>
     </el-tab-pane>
     <el-tab-pane label="推荐" name="recommend">
-      推荐
+      <Recommend></Recommend>
     </el-tab-pane>
     <el-tab-pane label="退出" name="out">
     </el-tab-pane>
@@ -12,11 +12,13 @@
 </template>
 <script>
 import Home from "@/components/homepageitem/Home";
+import Recommend from "@/components/homepageitem/Recommend";
 
 export default {
   name: 'HomePage',
   components: {
-    Home
+    Home,
+    Recommend
   },
   data() {
     return {

@@ -63,9 +63,11 @@
       <el-table-column prop="endTime" label="结束营业时间"/>
       <el-table-column prop="address" label="地址"/>
       <el-table-column prop="seller.name" label="商户名称"/>
-
-
     </el-table>
+    <el-pagination background layout="prev, pager, next"
+                   :page-size="pageSize"
+                   :total="total"
+                   @current-change="pageChange"/>
   </div>
 </template>
 
@@ -91,7 +93,8 @@ export default {
         sellerId: null,
         iconUrl: "",
       },
-      addFormDialogVisible: false
+      pageSize: 10,
+      total: null
     }
   },
   mounted() {
@@ -99,7 +102,14 @@ export default {
   },
   methods: {
     async initShopList() {
-      this.shopList = (await getShopList()).data
+      this.data = (await getShopList()).data
+      this.shopList = this.data.list
+      this.total = this.data.total
+    },
+    async pageChange(pageNum) {
+      this.data = (await getShopList(undefined, pageNum, this.pageSize)).data
+      this.shopList = this.data.list
+      this.total = this.data.total
     },
     async addShop() {
       const resp = await addShop(this.shopForm.name,
@@ -131,5 +141,9 @@ export default {
 <style scoped>
 .shop_icon {
   width: 80px;
+}
+
+el-pagination {
+  text-align: center;
 }
 </style>

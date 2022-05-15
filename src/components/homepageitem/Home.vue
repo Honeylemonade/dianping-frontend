@@ -31,6 +31,10 @@
             </div>
           </el-card>
         </div>
+        <el-pagination background layout="prev, pager, next"
+                       :page-size="pageSize"
+                       :total="total"
+                       @current-change="pageChange"/>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -47,7 +51,9 @@ export default {
       searchKeyword: null,
       activeId: 1,
       categoryList: null,
-      shopList: null
+      shopList: null,
+      pageSize: 10,
+      total: null
     }
   },
   mounted() {
@@ -59,13 +65,19 @@ export default {
       this.categoryList = (await getCategoryList()).data
     },
     async initShopList() {
-      this.shopList = (await searchShop(store.state.latitude, store.state.longitude, undefined, this.activeId)).data
+      this.data = (await searchShop(store.state.latitude, store.state.longitude, undefined, this.activeId)).data
+      this.shopList = this.data.list
+      this.total = this.data.total
     },
     async search() {
       if (this.searchKeyword === "") {
         this.searchKeyword = null
       }
       this.shopList = (await searchShop(store.state.latitude, store.state.longitude, this.searchKeyword, this.activeId)).data
+    },
+    async pageChange(pageNum) {
+      this.shopList =
+          (await searchShop(store.state.latitude, store.state.longitude, undefined, this.activeId, pageNum, this.pageSize)).data.list
     }
   }
 }

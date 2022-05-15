@@ -1,11 +1,6 @@
 <template>
   <div>
     <el-tabs tab-position="left" v-model="activeName" @click="checkOutTab()">
-      <el-tab-pane label="首页" name="home">
-        <div>
-          home
-        </div>
-      </el-tab-pane>
       <el-tab-pane label="商户管理" name="seller">
         <div>
           <Seller></Seller>
@@ -43,7 +38,7 @@ export default {
   },
   data() {
     return {
-      activeName: "home"
+      activeName: "seller"
     }
   },
   mounted() {

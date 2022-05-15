@@ -13,7 +13,6 @@
         </el-form>
       </el-dialog>
     </div>
-    <div>// TODO 分页功能</div>
     <el-table :data="sellerList" style="width: 100%">
       <el-table-column prop="id" label="id"/>
       <el-table-column prop="name" label="商户名"/>
