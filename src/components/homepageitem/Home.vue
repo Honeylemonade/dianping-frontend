@@ -73,7 +73,7 @@ export default {
       if (this.searchKeyword === "") {
         this.searchKeyword = null
       }
-      this.shopList = (await searchShop(store.state.latitude, store.state.longitude, this.searchKeyword, this.activeId)).data
+      this.shopList = (await searchShop(store.state.latitude, store.state.longitude, this.searchKeyword, this.activeId)).data.list
     },
     async pageChange(pageNum) {
       this.shopList =

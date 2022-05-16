@@ -3,7 +3,7 @@ import {reactive} from "vue";
 const store = {
     state: reactive({
         role: 'visitor',
-        userId: "",
+        userId: "3",
         latitude: 31.23916171,
         longitude: 121.48789949
     }),
